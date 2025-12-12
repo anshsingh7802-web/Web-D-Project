@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DIY Crafts - Sign Up</title>
+    <style>
+        body { font-family: Arial, sans-serif; background:#f2f2f2; margin:0; }
+
+        header, footer { background:#ff944d; color:white; text-align:center; padding:10px; }
+
+        nav { background:#333; text-align:center; }
+
+        nav a { color:white; margin:10px; text-decoration:none; display:inline-block; }
+
+        nav a:hover { text-decoration:underline; }
+
+        section { background:white; margin:15px; padding:15px; border-radius:8px; max-width:400px; margin-left:auto; margin-right:auto; }
+
+        input { width:100%; padding:6px; margin:5px 0; box-sizing:border-box; }
+
+        button { background:#ff944d; color:white; padding:8px 15px; border:none; border-radius:5px; cursor:pointer; width:100%; }
+        
+        .error { color:red; font-size:12px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>DIY Crafts & Tutorials</h1>
+    <p>Sign Up Page with Validation</p>
+</header>
+
+<nav>
+    <a href="index.html">🏠 Home</a>
+    <a href="tutorials.html">💡 Tutorials</a>
+    <a href="materials.html">🧰 Materials</a>
+    <a href="signup.html">🧾 Sign Up</a>
+</nav>
+
+<section>
+    <h2>Create Account</h2>
+    <p>Fill this form to get DIY craft updates.</p>
+
+    
+    <form id="signupForm" onsubmit="return validateForm();">
+        <label>Full Name</label>
+        <input type="text" id="name">
+        <div class="error" id="nameError"></div>
+
+        <label>Email</label>
+        <input type="text" id="email">
+        <div class="error" id="emailError"></div>
+
+        <label>Password</label>
+        <input type="password" id="password">
+        <div class="error" id="passError"></div>
+
+        <label>Confirm Password</label>
+        <input type="password" id="cpassword">
+        <div class="error" id="cpassError"></div>
+
+        <button type="submit">Sign Up</button>
+    </form>
+</section>
+
+<footer>
+    © 2025 DIY Crafts Website | Sign Up Page
+</footer>
+
+<script>
+function validateForm() {
+
+    let name  = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let pass  = document.getElementById("password").value;
+    let cpass = document.getElementById("cpassword").value;
+
+
+    document.getElementById("nameError").textContent  = "";
+    document.getElementById("emailError").textContent = "";
+    document.getElementById("passError").textContent  = "";
+    document.getElementById("cpassError").textContent = "";
+
+    let ok = true;
+
+    if (name === "") {
+        document.getElementById("nameError").textContent = "Please enter your name";
+        ok = false;
+    }
+
+    let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (email === "") {
+        document.getElementById("emailError").textContent = "Please enter your email";
+        ok = false;
+    } else if (!emailPattern.test(email)) {
+        document.getElementById("emailError").textContent = "Please enter a valid email";
+        ok = false;
+    }
+
+    if (pass.length < 6) {
+        document.getElementById("passError").textContent = "Minimum 6 characters";
+        ok = false;
+    }
+
+    if (cpass !== pass) {
+        document.getElementById("cpassError").textContent = "Passwords do not match";
+        ok = false;
+    }
+
+    if (ok) {
+    localStorage.setItem("signupName", name);
+    localStorage.setItem("signupEmail", email);
+    localStorage.setItem("signupPass", pass);
+
+    alert("Account created successfully!");
+
+    window.location.href = "login.html";   // <-- Redirect to Login Page
+}
+
+    return false; 
+}
+
+
+
+
+if (ok) {
+    localStorage.setItem("signupName", name);
+    localStorage.setItem("signupEmail", email);
+    localStorage.setItem("signupPass", pass);
+
+    alert("Account created successfully!");
+
+    window.location.href = "login.html";
+}
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DIY Crafts - Login</title>
+    <style>
+        body { font-family: Arial; background:#f2f2f2; margin:0; }
+
+        header, footer {
+            background:#ff944d; color:white; text-align:center; padding:10px;
+        }
+
+        section {
+            background:white; width:350px; margin:30px auto; padding:15px;
+            border-radius:8px;
+        }
+
+        input {
+            width:100%; padding:6px; margin:5px 0;
+        }
+
+        button {
+            width:100%; background:#ff944d; color:white; padding:8px;
+            border:none; border-radius:5px; cursor:pointer;
+        }
+
+        .error { color:red; font-size:13px; }
+        a { color:#ff944d; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>DIY Crafts & Tutorials</h1>
+    <p>Login Page</p>
+</header>
+
+<section>
+    <h2>Login</h2>
+
+    <form onsubmit="return loginUser();">
+        <label>Email</label>
+        <input type="text" id="loginEmail">
+        <div class="error" id="emailError"></div>
+
+        <label>Password</label>
+        <input type="password" id="loginPass">
+        <div class="error" id="passError"></div>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <p>Don’t have an account? <a href="signup.html">Sign Up</a></p>
+</section>
+
+<footer>
+    © 2025 DIY Crafts Website | Login
+</footer>
+
+<script>
+function loginUser() {
+    let email = document.getElementById("loginEmail").value.trim();
+    let pass  = document.getElementById("loginPass").value;
+
+    document.getElementById("emailError").textContent = "";
+    document.getElementById("passError").textContent  = "";
+
+    let storedEmail = localStorage.getItem("signupEmail");
+    let storedPass  = localStorage.getItem("signupPass");
+
+    if (email === "" || pass === "") {
+        if(email === "") document.getElementById("emailError").textContent = "Enter email";
+        if(pass  === "") document.getElementById("passError").textContent = "Enter password";
+        return false;
+    }
+
+    if (email === storedEmail && pass === storedPass) {
+        alert("Login successful!");
+        window.location.href = "index.html"; // redirect to home
+    } else {
+        document.getElementById("passError").textContent = "Incorrect email or password";
+    }
+
+    return false;
+}
+</script>
+
+</body>
+</html>
